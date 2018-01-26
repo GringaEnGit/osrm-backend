@@ -242,7 +242,6 @@ void unpackPath(const DataFacade<Algorithm> &facade,
                 UnpackingStatistics &unpacking_cache,
                 Callback &&callback)
 {
-    std::cout << "BidirectionalIterator" << std::endl;
     // make sure we have at least something to unpack
     if (packed_path_begin == packed_path_end)
         return;
@@ -256,14 +255,11 @@ void unpackPath(const DataFacade<Algorithm> &facade,
         recursion_stack.emplace(*std::prev(current), *current);
     }
 
-    std::cout << "I get here inside unpackPath to right before the recursion stack look" << std::endl;
-    unpacking_cache.Print();
-
     std::pair<NodeID, NodeID> edge;
     while (!recursion_stack.empty())
     {
         edge = recursion_stack.top();
-        std::cout<<"inside the recursion stack loop";
+
         unpacking_cache.CollectStats(edge);
 
         recursion_stack.pop();

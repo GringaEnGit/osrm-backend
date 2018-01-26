@@ -74,13 +74,16 @@ class UnpackingStatistics
         std::cout << "Misses :" << number_of_misses << " Finds: " << number_of_finds << " Total Lookups So Far: " << number_of_lookups << std::endl;
     }
 
-    void Print(std::pair<NodeID, NodeID> edge)
+    void PrintStats()
     {
-        std::cout << "{" << edge.first << ", " << edge.second << "}" << std::endl;
+        std::cout << "Total Misses :" << number_of_misses << " Total Finds: " << number_of_finds << " Total Lookups: " << number_of_lookups << std::endl;
     }
 
-    void Print()
+    void PrintEdgeLookups(std::pair<NodeID, NodeID> edge)
     {
+    	if (cache.find(edge) == cache.end()) {
+
+    	}
         std::cout << "{I'm heeeear}" << std::endl;
     }
 };
