@@ -233,7 +233,7 @@ void unpackPath(const DataFacade<Algorithm> &facade,
                 Callback &&callback)
 {
     UnpackingStatistics unpacking_cache(0);
-    unpackPath(facade,packed_path_begin,packed_path_end, unpacking_cache, callback);
+    unpackPath(facade, packed_path_begin, packed_path_end, unpacking_cache, callback);
 }
 template <typename BidirectionalIterator, typename Callback>
 void unpackPath(const DataFacade<Algorithm> &facade,
@@ -259,10 +259,13 @@ void unpackPath(const DataFacade<Algorithm> &facade,
     while (!recursion_stack.empty())
     {
         edge = recursion_stack.top();
-
-        unpacking_cache.CollectStats(edge);
-
         recursion_stack.pop();
+
+        if (unpacking_cache.EdgeInCache(edge))
+        {
+            continue;
+        }
+        unpacking_cache.CollectStats(edge);
 
         // Look for an edge on the forward CH graph (.forward)
         EdgeID smaller_edge_id = facade.FindSmallestEdge(
